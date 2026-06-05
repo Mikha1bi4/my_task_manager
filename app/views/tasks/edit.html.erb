@@ -1,0 +1,46 @@
+<h2>✏️ Редактировать задачу</h2>
+
+<%= form_with model: @task, local: true do |f| %>
+  <% if @task.errors.any? %>
+    <div style="background: #f8d7da; color: #721c24; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+      <h3 style="margin-top: 0;">Ошибки:</h3>
+      <ul>
+        <% @task.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div style="margin-bottom: 15px;">
+    <%= f.label :title, 'Название *', style: 'display: block; margin-bottom: 5px; font-weight: bold;' %>
+    <%= f.text_field :title, style: 'width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;' %>
+  </div>
+  
+  <div style="margin-bottom: 15px;">
+    <%= f.label :description, 'Описание', style: 'display: block; margin-bottom: 5px; font-weight: bold;' %>
+    <%= f.text_area :description, rows: 4, style: 'width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;' %>
+  </div>
+  
+  <div style="margin-bottom: 15px;">
+    <%= f.label :priority, 'Приоритет', style: 'display: block; margin-bottom: 5px; font-weight: bold;' %>
+    <%= f.select :priority, [['🟢 Низкий', 'low'], ['🟡 Средний', 'medium'], ['🔴 Высокий', 'high']], {}, style: 'width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;' %>
+  </div>
+  
+  <div style="margin-bottom: 15px;">
+    <%= f.label :due_date, 'Срок выполнения', style: 'display: block; margin-bottom: 5px; font-weight: bold;' %>
+    <%= f.date_field :due_date, style: 'width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;' %>
+  </div>
+  
+  <div style="margin-bottom: 15px;">
+    <%= f.label :completed do %>
+      <%= f.check_box :completed %>
+      <span style="margin-left: 5px;">✅ Отметить как выполненную</span>
+    <% end %>
+  </div>
+  
+  <div style="display: flex; gap: 10px;">
+    <%= f.submit 'Обновить задачу', style: 'background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer;' %>
+    <%= link_to 'Отмена', tasks_path, style: 'background: #6c757d; color: white; padding: 10px 20px; text-decoration: none; border-radius: 8px;' %>
+  </div>
+<% end %>

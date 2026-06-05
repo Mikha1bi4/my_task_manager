@@ -1,0 +1,20 @@
+<h2>📌 <%= @task.title %></h2>
+
+<div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0;">
+  <p><strong>📊 Статус:</strong> <%= @task.status %></p>
+  <p><strong>⚡ Приоритет:</strong> <%= @task.priority_name %></p>
+  <p><strong>📅 Срок выполнения:</strong> <%= @task.due_date ? @task.due_date.strftime("%d.%m.%Y") : 'Не указан' %></p>
+  <p><strong>🕐 Создана:</strong> <%= @task.created_at.strftime("%d.%m.%Y в %H:%M") %></p>
+  
+  <% if @task.description.present? %>
+    <hr>
+    <p><strong>📝 Описание:</strong></p>
+    <p style="white-space: pre-wrap; background: white; padding: 15px; border-radius: 8px;"><%= @task.description %></p>
+  <% end %>
+</div>
+
+<div style="display: flex; gap: 10px;">
+  <%= link_to '✏️ Редактировать', edit_task_path(@task), style: 'background: #ffc107; color: #000; padding: 10px 20px; text-decoration: none; border-radius: 8px;' %>
+  <%= link_to '🗑️ Удалить', @task, method: :delete, data: { confirm: 'Вы уверены, что хотите удалить задачу?' }, style: 'background: #dc3545; color: white; padding: 10px 20px; text-decoration: none; border-radius: 8px;' %>
+  <%= link_to '⬅️ Назад к списку', tasks_path, style: 'background: #6c757d; color: white; padding: 10px 20px; text-decoration: none; border-radius: 8px;' %>
+</div>

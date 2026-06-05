@@ -81,4 +81,15 @@ Rails.application.configure do
   config.hosts << pf_host
 
   config.action_cable.allowed_request_origins = ["https://#{pf_host}"]
+
+    # Настройка для Devise
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  
+  # Настройка для GitHub Codespaces
+  if ENV["CODESPACES"].present?
+    codespace_name = ENV["CODESPACE_NAME"]
+    domain = ENV["GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN"]
+    config.hosts << "#{codespace_name}-3000.#{domain}"
+    config.action_mailer.default_url_options = { host: "#{codespace_name}-3000.#{domain}", protocol: "https" }
+  end
 end
